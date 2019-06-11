@@ -1,0 +1,252 @@
+@import"base.scss";
+
+input {
+    // -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    padding: 1px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+    font: inherit;
+    outline: none;
+}
+
+
+#J-loginPage {
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 20px;
+
+    img {
+        width: 300px;
+        height: 70px;
+    }
+}
+
+.ui-form {
+    width: 1000px;
+    height: 697px;
+    margin-top: 21px;
+    margin-bottom: 15px;
+    margin: 0 auto;
+
+    .form-hd-span {
+        font-family: 宋体;
+        font-size: 12px;
+        font-weight: normal;
+        color: rgb(102, 102, 102);
+        width: 150px;
+        height: 39px;
+        line-height: 39px;
+        margin-left: 850px;
+
+        a {
+            color: #FF611B;
+            font-size: 14px;
+        }
+    }
+
+    .form-cont {
+        height: 658px;
+        border: 1px solid #e5e5e5;
+        background-image: url(../images/bg-regist.jpg);
+        background-position: 582px 52px;
+        background-repeat: no-repeat;
+
+        .ui-form-item {
+            height: 60px;
+            margin: 0px;
+            padding-left: 31px;
+            font-size: 24px;
+            font-family: '微软雅黑';
+            font-weight: normal;
+            color: #333333;
+            padding-top: 50px;
+        }
+
+        .form-verify-error {
+            height: 60px;
+            margin: 0px;
+            padding-left: 50px;
+            padding-bottom: 0px;
+            color: #666666;
+            font-family: '宋体';
+            font-size: 12px;
+
+            .ui-label {
+                margin-top: 6px;
+                display: block;
+                width: 110px;
+                text-align: left;
+                float: left;
+            }
+
+            .ui-input-item {
+                display: inline-block;
+                position: relative;
+                color: #666666;
+                font-family: '宋体';
+                font-size: 12px;
+
+                .ui-input {
+                    margin: 0px;
+                    width: 316px;
+                    height: 28px;
+                    padding: 0 0 0 10px;
+                    border: 1px solid #e5e5e5;
+                    border-radius: 2px;
+                    line-height: normal;
+                }
+            }
+
+            .ui-verify {
+                display: block;
+                height: 30px;
+                margin-left: 109px;
+                line-height: 30px;
+                width: 328px;
+                color: #fd5421;
+                font-family: '����';
+                font-size: 12px;
+                position: relative;
+
+                .icon {
+                    top: 7px;
+                    display: inline-block;
+                    background: url(../images/s-icon.png) no-repeat;
+                    left: -17px;
+                    width: 14px;
+                    height: 14px;
+                    // float: left;
+                    position: absolute;
+                }
+            }
+
+            .sccode {
+                float: right;
+                width: 80px;
+                height: 30px;
+                background-color: #ec3939;
+                margin-right: 540px;
+                font-size: 26px;
+                line-height: 30px;
+                text-align: center;
+                color: #FFFFFF;
+                font-weight: bold
+            }
+        }
+
+        .ui-level {
+            width: 328px;
+            height: 30px;
+            font-family: '宋体';
+            font-size: 12px;
+            margin-left: 300px;
+
+            .level-label-remark {
+                float: left;
+            }
+
+            .level-list {
+                margin-right: 10px;
+                float: left;
+
+                li {
+                    width: 24px;
+                    height: 10px;
+                    font-size: 0px;
+                    float: left;
+                    margin: 1px;
+                    background: #E5E5E5;
+                }
+
+                .level-txt {
+                    text-align: left;
+                    font-size: 12px;
+                    margin-left: 10px;
+                    border: none;
+                    line-height: 9px;
+                    background: none;
+                }
+            }
+        }
+
+        .ui-checkbox {
+            cursor: pointer;
+        }
+
+        #ljzc {
+            outline: none;
+            border: none;
+            width: 110px;
+            height: 38px;
+            font-family: '微软雅黑';
+            font-size: 18px;
+            color: #FFFFFF;
+            background-color: #ff611b;
+            text-decoration: none;
+            display: inline-block;
+            line-height: 37px;
+            cursor: pointer;
+            margin-left: 200px;
+            margin-top: 20px;
+        }
+    }
+}
+
+.copyright {
+    width: 1000px;
+    margin: 0 auto;
+    height: auto;
+    font-size: 12px;
+    color: #666666;
+    text-align: center;
+
+    p {
+        line-height: 24px;
+    }
+}
+
+
+
+//弹出层CSS
+.tcshow {
+    background-color: #686666;
+    width: 300px;
+    height: 150px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 10000;
+    color: #FFFFFF;
+    border-radius: 5px;
+
+    p {
+        line-height: 60px;
+        color: #FFFFFF;
+        text-align: center;
+    }
+
+    .tcshow-l {
+        margin-left: 100px;
+        color: #FFFFFF;
+        display: block;
+        width: 100px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        border: 1px solid #FFFFFF;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+
+}
+
+//弹出层CSS

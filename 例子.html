@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<!-- 注册JQ -->
+<script>
+    //判断本地存储
+    var loginId = window.localStorage.getItem("loginId");
+    var loginName = window.localStorage.getItem("loginName");
+    //对面loginId进行判断
+    if (loginId) {
+        var spanBtn = $("<a class='userd2'></a><button onclick='existLogin()' class='btn'>退出</button>");
+        $("#userdl").append(spanBtn);
+        $(".userd2").html("欢迎:" + loginName);
+        $(".btn").css({
+            "outline": "none",
+            "border": "none",
+            "width": "34px",
+            "height": "20px",
+            "font-family": '微软雅黑',
+            "font-size": "12px",
+            "color": " #FFFFFF",
+            "background-color": "#ff611b",
+            "text-decoration": " none",
+            "display": "inline-block",
+            "line-height": "20px",
+            "cursor": "pointer",
+        });
+    } else {
+
+        var spanBtn = $(
+            "<a href='javascript:void(0)' id='djtzdl'>登陆</a><span>|</span><a href='../html/register.html'>注册</a>");
+        $("#userdl").append(spanBtn);
+        $("#djtzdl").on("click", function () {
+            gotoLogin();
+            window.location.href = "../html/login.html";
+        })
+    }
+
+
+    //封装退出函数,删除已经存在的本地储存信息;
+    function existLogin() {
+        window.localStorage.removeItem("loginId");
+        window.localStorage.removeItem("loginName");
+        gotoLogin()
+    }
+    //封装一个函数让页面带页面信息去到登陆页面
+    function gotoLogin() {
+        window.localStorage.setItem("backUrl", window.location.href); //将本地页面的网站地址丢入本地储存
+        window.location.href = "../html/login.html"; //跳转至本页面
+    }
+
+
+    //动态生成商品详情信息
+    var id = window.localStorage.getItem("goodsid");
+    $.ajax({
+        type: "get",
+        url: "../php/fordetails.php",
+        data: {
+            goodsid: id
+        },
+        dataType: "json",
+        success: function (obj) {
+            var html = "";
+            var str = "";
+            var {
+                id,
+                goodsname,
+                goodsnum,
+                goodsprice,
+                goodsohter,
+                goodsimg1,
+                goodsimg2,
+            } = obj;
+
+            html = `<div class="x-goodsname">
+                        <h2 class="t-ellipsis">
+                            ${goodsname} </h2>
+                    </div>
+                    <div class="x-goodsprice">
+                        <ul class="x-detail-list">
+                            <li class="x-bigger-item">
+                                <div class="x-t">价　　格</div>
+                                <div class="x-c">
+                                    <span class="x-price-new">￥${goodsprice}</span>
+                                    <span class="x-price-tips">销售价</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="x-goodsnum">
+                        <span>销&nbsp;&nbsp;&nbsp;&nbsp;量</span><span>已售出<span class="x-goodsnum-sp">${goodsohter}</span>件</span>
+                    </div>
+                    <div class="x-goodsdz">
+                       <span>配送地址</span>
+                    </div>
+                    <div class="x-goodsohter">
+                        <span>库&nbsp;&nbsp;&nbsp;&nbsp;存</span><span class="x-goodsohter-sp">${goodsnum}</span>
+                    </div>
+                    <div class="none-border">
+                        <div class="none-border1">数量</div>
+                        <div class="x-count-bar">
+                            <label class="x-count-input">
+                                <input type="text" value="1" id="buyTotalNum">
+                            </label>
+                            <label class="x-count-btn">
+                                <a class="x-add">+</a>
+                                <a class="x-cut">-</a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="x-product-btn">
+                        <button class="ljgm-btn"><i></i>立即购买</button>
+                        <button class="jrgwc-btn"><i></i>加入购物车</button>
+                    </div>`
+            str = ` <li>
+                        <div class="small-img">
+                        <img src="../images/${goodsimg1}"/>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="small-img">
+                        <img src="../images/${goodsimg2}"/>
+                        </div>
+                    </li>`
+
+            $(".animation03").append(str);
+            $(".x-intro-left").append(html);
+            //放大镜Jq
+            $(function () {
+
+                var magnifierConfig = {
+                    magnifier: "#magnifier1", //最外层的大容器
+                    width: 400, //承载容器宽
+                    height: 447, //承载容器高
+                    moveWidth: null, //如果设置了移动盒子的宽度，则不计算缩放比例
+                    zoom: 5 //缩放比例
+                };
+
+                var _magnifier = magnifier(magnifierConfig);
+            });
+            //放大镜Jq
+
+            //点击加号按钮
+            $(".x-add").on("click", function () {
+                var num = $("#buyTotalNum").val() * 1 + 1;
+                $("#buyTotalNum").val(num);
+            });
+
+            $(".x-cut").on("click", function () {
+
+                var num = $("#buyTotalNum").val() * 1 - 1;
+                $("#buyTotalNum").val(num);
+
+            });
+
+            //,立即购买按钮
+            $(".ljgm-btn").on("click", function () {
+                if (loginId) {
+                    let userId = loginId;
+                    let goodsId = id;
+                    let goodsName = goodsname;
+                    let goodsPrice = goodsprice;
+                    let goodsImg = goodsimg1;
+                    let goodsnum = $("#buyTotalNum").val() * 1;
+                    $.ajax({
+                        type: "get",
+                        url: "../php/addmyshoppingcar.php",
+                        data: {
+                            userid: userId,
+                            goodsid: goodsId,
+                            goodsname: goodsName,
+                            goodsnum: goodsnum,
+                            goodsprice: goodsPrice,
+                            goodsimg: goodsImg
+                        },
+                        dataType: "json",
+                        success: function (obj) {
+                            if (obj["code"] == 1) {
+                                window.location.href = "../html/myshoppingcar.html"
+                            } else {
+                                alert(obj["msg"])
+
+                            }
+                        }
+                    })
+
+                } else {
+                    $(".tcshow").show(function () {
+                        $(".tcshow-l").click(function () {
+                            gotoLogin();
+                            window.location.href = "./login.html";
+                        })
+
+                        $(".tcshow-r").click(function () {
+                            $(".tcshow").hide();
+                        })
+                    });
+                }
+            });
+
+
+
+
+
+            //点击加入购物车
+            $(".jrgwc-btn").on("click", function (e) {
+                ($("#ball img").attr("src", `../images/${goodsimg1}`)); //飞入购物车效果
+                var endX = $(".cartbox").offset().left;
+                var endY = $(".cartbox").offset().top;
+                var width = $("#ball").width() / 2;
+                var height = $("#ball").height() / 2;
+                var clientX = e.pageX;
+                var clientY = e.pageY;
+                $("#ball").css({
+                    "left": clientX - width,
+                    "top": clientY - height
+                }).show(function () {
+                    $(this).stop(true, true).animate({
+                        "left": endX,
+                        "top": endY
+                    }, function () {
+                        $(this).hide();
+                    });
+                })
+
+                var spz = $(".icon-cartnum").html() * 1 + $("#buyTotalNum").val() * 1;
+                $(".icon-cartnum").html(spz);
+
+                if (loginId) {
+                    let userId = loginId;
+                    let goodsId = id;
+                    let goodsName = goodsname;
+                    let goodsPrice = goodsprice;
+                    let goodsImg = goodsimg1;
+                    let goodsnum = $("#buyTotalNum").val() * 1;
+                    $.ajax({
+                        type: "get",
+                        url: "../php/addmyshoppingcar.php",
+                        data: {
+                            userid: userId,
+                            goodsid: goodsId,
+                            goodsname: goodsName,
+                            goodsnum: goodsnum,
+                            goodsprice: goodsPrice,
+                            goodsimg: goodsImg
+                        },
+                        dataType: "json",
+                        success: function (obj) {
+                            if (obj["code"] == 1) {
+
+                            } else {
+                                alert(obj["msg"])
+
+                            }
+                        }
+                    })
+
+                } else {
+                    $(".tcshow").show(function () {
+                        $(".tcshow-l").click(function () {
+                            gotoLogin();
+                            window.location.href = "./login.html";
+                        })
+
+                        $(".tcshow-r").click(function () {
+                            $(".tcshow").hide();
+                        })
+                    });
+                }
+            });
+        }
+    });
+</script>
+<!-- 登陆 -->
+<script>
+    //验证码的生成   密码强度没有做
+    var array = [
+        ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
+            "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
+            "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+        ],
+        ["0", "1", "2", "3", "4", "6", "7", "8", "9"]
+    ]; //生成验证码需要的元素
+    var str = "";
+    randomCode();
+    $(".sccode").click(function () {
+        randomCode();
+    })
+
+
+    function randomCode() {
+        str = "";
+        for (var i = 0; i < 4; i++) {
+            var temp = Math.random();
+            temp = temp < 0.5 ? Math.floor(temp) : Math.ceil(temp);
+            var length = array[temp].length;
+            var index = parseInt(Math.random() * length);
+            str += array[temp][index];
+        }
+        $(".sccode").html(str);
+    }
+
+
+    //用户名的注册验证
+    var usernameReg = /^[a-zA-Z0-9]{6,12}$/;
+    var usernameOk = false;
+    $("#username").focus(function () {
+        $(this).attr("placeholder", "");
+
+    });
+    $("#username").blur(function () {
+        if ($(this).val() == "") {
+            $(".ui-input").eq(0).css("border", "1px solid #FF611B");
+            $("#usernamemessage").show();
+            usernameOk = false;
+        } else if ($(this).val().length < 6 || $(this).val().length > 12) {
+            $(".ui-input").eq(0).css("border", "1px solid #FF611B");
+            $("#usernamemessage").show().html("<i class='icon'></i>" + "用户名长度不合法");
+            usernameOk = false;
+        } else if (!$(this).val().match(usernameReg)) {
+            $(".ui-input").eq(0).css("border", "1px solid #FF611B");
+            $("#usernamemessage").show().html("<i class='icon'></i>" + "用户名中含有非法字符");
+            usernameOk = false;
+        } else {
+            $("#usernamemessage").show().html("用户名可用 √").css("color", "green");
+            usernameOk = true;
+        }
+    });
+    //注册手机号码
+    var phoneRge = /^1[|3|4|5|6|7|8|9]\d{9}$/;
+    var phoneOk = false;
+    $("#usertel").focus(function () {
+        $(this).attr("placeholder", "");
+    });
+    $("#usertel").blur(function () {
+        if ($(this).val() == "") {
+            $(".ui-input").eq(1).css("border", "1px solid #FF611B");
+            $("#phoneoremailmessage").show();
+            phoneOk = false;
+        } else if ($(this).val().length != 11) {
+            $(".ui-input").eq(1).css("border", "1px solid #FF611B");
+            $("#phoneoremailmessage").show().html("<i class='icon'></i>" + "手机号长度不合法");
+            phoneOk = false;
+        } else if (!$(this).val().match(phoneRge)) {
+            $(".ui-input").eq(1).css("border", "1px solid #FF611B");
+            $("#phoneoremailmessage").show().html("<i class='icon'></i>" + "手机号格式不合法");
+            phoneOk = false;
+        } else {
+            $("#phoneoremailmessage").show().html("手机号可用 √").css("color", "green");
+            phoneOk = true;
+        }
+    });
+
+
+    //密码框验证
+    var userpwdReg = /^[0-9a-z_$]{6,20}$/ig;
+    var userpwdok = false;
+    $("#userpwd").focus(function () {
+        $(this).attr("placeholder", "");
+    })
+    $("#userpwd").blur(function () {
+        if ($(this).val() == "") {
+            $(".ui-input").eq(2).css("border", "1px solid #FF611B");
+            $("#pwdmessage").show();
+            userpwdok = false;
+        } else if ($(this).val().length < 6 || $(this).val().length > 20) {
+            $(".ui-input").eq(2).css("border", "1px solid #FF611B");
+            $("#pwdmessage").show().html("<i class='icon'></i>" + "密码长度不合法");
+            userpwdok = false;
+        } else if (!$(this).val().match(userpwdReg)) {
+            $(".ui-input").eq(2).css("border", "1px solid #FF611B");
+            $("#pwdmessage").show().html("<i class='icon'></i>" + "密码含有非法字符");
+            userpwdok = false;
+        } else {
+            $("#pwdmessage").show().html("密码可用 √").css("color", "green");
+
+            var numCount = (/[0-9]/g).test($("#userpwd").val()) ? 1 : 0;
+            var upperCount = (/[A-Z]/g).test($("#userpwd").val()) ? 1 : 0;
+            var lowerCount = (/[a-z]/g).test($("#userpwd").val()) ? 1 : 0;
+
+            switch (numCount + upperCount + lowerCount) {
+                case 1:
+                    $(".level-1").css("background", "#ff611b");
+                    $(".level-txt").html("弱");
+                    break;
+                case 2:
+                    $(".level-1").css("background", "#ff611b");
+                    $(".level-2").css("background", "#ff611b");
+                    $(".level-txt").html("中");
+                    break;
+                case 3:
+                    $(".level-1").css("background", "#ff611b");
+                    $(".level-2").css("background", "#ff611b");
+                    $(".level-3").css("background", "#ff611b");
+                    $(".level-txt").html("强");
+                    break;
+
+                    userpwdok = true;
+
+            }
+        }
+    });
+
+
+
+
+
+    //再次验证密码
+    var userpwdok2 = false;
+    $("#userpwd2").focus(function () {
+        $(this).attr("placeholder", "");
+        $(this).css("color", "");
+    });
+    $("#userpwd2").blur(function () {
+        if ($(this).val() == "") {
+            $(".ui-input").eq(3).css("border", "1px solid #FF611B");
+            $("#pwd2message").show();
+            userpwdok2 = false
+        } else if ($(this).val() != $("#userpwd").val()) {
+            $(".ui-input").eq(3).css("border", "1px solid #FF611B");
+            $("#pwd2message").show().html("<i class='icon'></i>" + "2次输入密码不一样,请重新输入");
+            userpwdok2 = false
+        } else {
+            $("#pwd2message").show().html("密码一致 √").css("color", "green");
+            userpwdok2 = true;
+        }
+    })
+
+
+    //验证码效验
+    var numsCode = false;
+    $("#Nums").focus(function () {
+        $(this).attr("placeholder", "");
+    });
+    $("#Nums").blur(function () {
+        if ($(this).val() == "") {
+            $(".ui-input").eq(4).css("border", "1px solid #FF611B");
+            $("#verificationcodemessage").show();
+            numsCode = false;
+        } else if ($(this).val().toUpperCase() != str.toUpperCase()) {
+            $(".ui-input").eq(4).css("border", "1px solid #FF611B");
+            $("#verificationcodemessage").show().html("<i class='icon'></i>" + "验证码错误请重新输入");
+            randomCode();
+            numsCode = false;
+        } else {
+            $("#verificationcodemessage").show().html("验证码输入正确 √").css("color", "green");
+            numsCode = true;
+        }
+    });
+
+    //是否同意协议
+    $("#J-chkbox-readMe").click(function () {
+        if ($(this).attr('checked')) {
+            $(this).attr('checked', false);
+
+        } else {
+            $(this).attr('checked', true);
+            $("#registrationagreementmessage").show().html("已勾选用户协议 √").css("color", "green");
+
+        }
+    });
+
+    //点击注册
+    $("#ljzc").click(function (event) {
+        if ($("#J-chkbox-readMe").attr('checked') && usernameOk && phoneOk && userpwdok2 &&
+            numsCode) {
+            $.ajax({
+                type: "get",
+                url: "../php/register.php",
+                data: {
+                    username: $("#username").val(),
+                    usertel: $("#usertel").val(),
+                    userpwd: $("#userpwd").val()
+                },
+                dataType: "json",
+                success: function (result) {
+                    if (result["code"] == 1) {
+                        window.location.href = "./login.html";
+                    } else {
+                        $(".tcshow").show();
+                        $(".tcshow p").html(result["msg"]);
+                        $(".tcshow-l").on("click", function () {
+                            $(".tcshow").hide();
+                            window.location.href = "register.html";
+                        })
+                    }
+                }
+            });
+        } else {
+            $(".tcshow").show();
+            $(".tcshow p").html("请勾选用户协议");
+            $(".tcshow-l").on("click", function () {
+                $(".tcshow").hide();
+            })
+            $("#registrationagreementmessage").show();
+
+        }
+    });
+</script>
+<!-- 商品列表 -->
+<script>
+    //判断本地存储
+
+    var loginId = window.localStorage.getItem("loginId");
+    var loginName = window.localStorage.getItem("loginName");
+
+    //封装退出函数,删除已经存在的本地储存信息;
+    function existLogin() {
+        window.localStorage.removeItem("loginId");
+        window.localStorage.removeItem("loginName");
+        gotoLogin()
+    }
+    //封装一个函数让页面带页面信息去到登陆页面
+    function gotoLogin() {
+        window.localStorage.setItem("backUrl", window.location.href); //将本地页面的网站地址丢入本地储存
+        window.location.href = "../html/goodsList.html"; //跳转至本页面
+    }
+
+
+
+    //对面loginId进行判断
+    if (loginId) {
+        var spanBtn = $("<a class='userd2'></a><button onclick='existLogin()' class='btn'>退出</button>");
+        $("#userdl").append(spanBtn);
+        $(".userd2").html("欢迎:" + loginName);
+        $(".btn").css({
+            "outline": "none",
+            "border": "none",
+            "width": "34px",
+            "height": "20px",
+            "font-family": '微软雅黑',
+            "font-size": "12px",
+            "color": " #FFFFFF",
+            "background-color": "#ff611b",
+            "text-decoration": " none",
+            "display": "inline-block",
+            "line-height": "20px",
+            "cursor": "pointer",
+        });
+
+    } else {
+        var spanBtn = $(
+            "<a href='javascript:void(0)' id='djtzdl'>登陆</a><span>|</span><a href='../html/register.html'>注册</a>")
+        $("#userdl").append(spanBtn);
+        $("#djtzdl").on("click", function () {
+            gotoLogin()
+            window.location.href = "../html/login.html";
+        })
+    }
+    var key = "";
+    var paixu = "id";
+    var rank = "asc";
+
+
+    productList(key, paixu, rank);
+    //销量从高到底排列
+    $(".sort-li").eq(0).on("click", function () {
+        $("#page").html("");
+        var key = "";
+        var paixu = "goodsohter";
+        var rank = "desc";
+        productList1(key, paixu, rank);
+    });
+
+    //销量从底到高
+    $(".sort-li").eq(1).on("click", function () {
+        $("#page").html("");
+        var key = "";
+        var paixu = "goodsohter";
+        var rank = "asc";
+        productList1(key, paixu, rank);
+    })
+
+    //点击搜索框搜素
+    $(".ui-btn").on("click", function () {
+        $("#page").html("");
+        var key = $(".ui-input").val();
+        var paixu = "id";
+        var rank = "asc";
+        productList1(key, paixu, rank);
+
+    });
+
+    //价格区间以下
+    $(".price-sort-span").eq(1).on("click", function () {
+        $("#page").html("");
+        var key = "";
+        var paixu = "goodsprice";
+        var rank = "asc";
+        var jg1 = 0;
+        var jg2 = 100;
+        productList2(key, paixu, rank, jg1, jg2);
+
+    });
+    $(".price-sort-span").eq(2).on("click", function () {
+        $("#page").html("");
+        var key = "";
+        var paixu = "goodsprice";
+        var rank = "asc";
+        var jg1 = 100;
+        var jg2 = 300;
+        productList2(key, paixu, rank, jg1, jg2);
+
+    });
+    $(".price-sort-span").eq(3).on("click", function () {
+        $("#page").html("");
+        var key = "";
+        var paixu = "goodsprice";
+        var rank = "asc";
+        var jg1 = 300;
+        var jg2 = 30000;
+        productList2(key, paixu, rank, jg1, jg2);
+
+    })
+
+
+
+    //搜索排序
+    function productList1(key, paixu, rank) {
+        var productsUl = $(".products-1")[0];
+        $.ajax({
+            type: "get",
+            data: {
+                key: key,
+                paixu: paixu,
+                rank: rank,
+            },
+            url: "../php/getallgoodslistcount.php",
+            dataType: "json",
+            success: function (obj) {
+                var count = obj["count"];
+                new Page("#page", {
+
+                    count: count,
+                    shownum: 16,
+                    showpage: 5,
+                    callback: function (pageIndex) {
+                        $.ajax({
+                            type: "get",
+                            url: "../php/goodsList1.php",
+                            data: {
+                                key: key,
+                                paixu: paixu,
+                                rank: rank,
+                                skipnum: (pageIndex - 1) * 16,
+                                shownum: 16,
+                            },
+                            dataType: "json",
+                            success: function (list) {
+                                var html = "";
+                                list.forEach(item => {
+                                    var {
+                                        id,
+                                        goodsname,
+                                        goodsnum,
+                                        goodsprice,
+                                        goodsimg,
+                                        goodsohter
+                                    } = item;
+                                    html += `<li class="products-items">
+                                                <div class="product-photo" data-id=${id}>
+                                                 <img src="../images/${goodsimg}" alt="">
+                                                </div>
+
+                                                <div class="product-info">
+                                                    <div class="product-price">
+                                                        <span>￥ ${(goodsprice*1).toFixed(2)}</span>
+                                                    </div>
+                                                    <div style="color: purple;margin-bottom: 5px;margin-top:5px;">商品库存 ${goodsnum} 件</div>
+                                                    <div class="product-name">
+                                                        <span>${goodsname}</span>
+                                                    </div>
+                                                    <div class="product-ohter">
+                                                        <span>成交 ${goodsohter} 笔</span>
+                                                    </div>
+                                                    <div class="product-jrgwc" data-id=${id}  data-src="../images/${goodsimg}" data-name=${goodsname} data-price=${goodsprice}>
+                                                     加入购物车
+                                                    </div>
+                                                </div>
+                                            </li>`
+                                });
+                                productsUl.innerHTML = html;
+
+                                $(".product-photo").on("click", function () {
+                                    var goodsId = $(this).attr("data-id");
+                                    localStorage.setItem("goodsid",
+                                        goodsId);
+                                    window.location.href =
+                                        "./goodsdetails.html";
+                                });
+
+                                $(".product-jrgwc").on("click", function (
+                                    e) {
+                                    if (loginId) {
+                                        var userId = loginId;
+                                        var goodsId = $(this).attr(
+                                            "data-id");
+                                        var goodsName = $(this).attr(
+                                            "data-name");
+                                        var goodsprice = $(this).attr(
+                                            "data-price");
+                                        var goodsimg = $(this).attr(
+                                            "data-src").split("/")[2];
+
+                                        var goodsImg = $(this).attr(
+                                            "data-src");
+                                        ($("#ball img").attr("src",
+                                            goodsImg
+                                        )); //飞入购物车效果
+                                        var endX = $(".cartbox").offset()
+                                            .left;
+                                        var endY = $(".cartbox").offset()
+                                            .top;
+                                        var width = $("#ball").width() / 2;
+                                        var height = $("#ball").height() /
+                                            2;
+                                        var clientX = e.pageX;
+                                        var clientY = e.pageY;
+                                        $("#ball").css({
+                                            "left": clientX - width,
+                                            "top": clientY - height
+                                        }).show(function () {
+                                            $(this).stop(true, true)
+                                                .animate({
+                                                    "left": endX,
+                                                    "top": endY
+                                                }, function () {
+                                                    $(this)
+                                                        .hide();
+                                                });
+                                        })
+
+                                        var spz = $(".icon-cartnum")
+                                            .html() * 1 + 1;
+                                        $(".icon-cartnum").html(spz);
+                                        //利用ajax往数据库内传递数据
+                                        $.ajax({
+                                            type: "get",
+                                            url: "../php/addmyshoppingcar.php",
+                                            data: {
+                                                userid: userId,
+                                                goodsid: goodsId,
+                                                goodsname: goodsName,
+                                                goodsnum: 1,
+                                                goodsprice: goodsprice,
+                                                goodsimg: goodsimg
+                                            },
+                                            dataType: "json",
+                                            success: function (
+                                                obj) {
+                                                if (obj[
+                                                        "code"
+                                                    ] == 1) {
+
+                                                } else {
+                                                    alert(obj[
+                                                        "msg"
+                                                    ])
+
+                                                }
+                                            }
+                                        })
+                                    } else {
+                                        $(".tcshow").show(function () {
+                                            $(".tcshow-l").click(
+                                                function () {
+                                                    gotoLogin();
+                                                    window
+                                                        .location
+                                                        .href =
+                                                        "./login.html";
+                                                })
+                                            $(".tcshow-r").click(
+                                                function () {
+                                                    $(".tcshow")
+                                                        .hide();
+                                                })
+                                        });
+
+                                    }
+
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
+
+
+
+
+
+
+
+    //页面打开动态生成元素
+    function productList(key, paixu, rank) {
+        var productsUl = $(".products-1")[0];
+        $.ajax({
+            type: "get",
+            data: {
+                key: key,
+                paixu: paixu,
+                rank: rank,
+            },
+            url: "../php/getallgoodslistcount.php",
+            dataType: "json",
+            success: function (obj) {
+                var count = obj["count"];
+                new Page("#page", {
+
+                    count: count,
+                    shownum: 16,
+                    showpage: 5,
+                    callback: function (pageIndex) {
+                        $.ajax({
+                            type: "get",
+                            url: "../php/goodsList.php",
+                            data: {
+                                skipnum: (pageIndex - 1) * 16,
+                                shownum: 16,
+                            },
+                            dataType: "json",
+                            success: function (list) {
+                                var html = "";
+                                list.forEach(item => {
+                                    var {
+                                        id,
+                                        goodsname,
+                                        goodsnum,
+                                        goodsprice,
+                                        goodsimg,
+                                        goodsohter
+                                    } = item;
+                                    html += `<li class="products-items">
+                                                <div class="product-photo" data-id=${id}>
+                                                 <img src="../images/${goodsimg}" alt="">
+                                                </div>
+
+                                                <div class="product-info">
+                                                    <div class="product-price">
+                                                        <span>￥ ${(goodsprice*1).toFixed(2)}</span>
+                                                    </div>
+                                                    <div style="color: purple;margin-bottom: 5px;margin-top:5px;">商品库存 ${goodsnum} 件</div>
+                                                    <div class="product-name">
+                                                        <span>${goodsname}</span>
+                                                    </div>
+                                                    <div class="product-ohter">
+                                                        <span>成交 ${goodsohter} 笔</span>
+                                                    </div>
+                                                    <div class="product-jrgwc" data-id=${id}  data-src="../images/${goodsimg}" data-name=${goodsname} data-price=${goodsprice}>
+                                                     加入购物车
+                                                    </div>
+                                                </div>
+                                            </li>`
+                                });
+                                productsUl.innerHTML = html;
+
+                                $(".product-photo").on("click", function () {
+                                    var goodsId = $(this).attr("data-id");
+                                    localStorage.setItem("goodsid",
+                                        goodsId);
+                                    window.location.href =
+                                        "./goodsdetails.html";
+                                });
+
+                                $(".product-jrgwc").on("click", function (
+                                    e) {
+                                    if (loginId) {
+                                        var userId = loginId;
+                                        var goodsId = $(this).attr(
+                                            "data-id");
+                                        var goodsName = $(this).attr(
+                                            "data-name");
+                                        var goodsprice = $(this).attr(
+                                            "data-price");
+                                        var goodsimg = $(this).attr(
+                                            "data-src").split("/")[2];
+
+                                        var goodsImg = $(this).attr(
+                                            "data-src");
+                                        ($("#ball img").attr("src",
+                                            goodsImg
+                                        )); //飞入购物车效果
+                                        var endX = $(".cartbox").offset()
+                                            .left;
+                                        var endY = $(".cartbox").offset()
+                                            .top;
+                                        var width = $("#ball").width() / 2;
+                                        var height = $("#ball").height() /
+                                            2;
+                                        var clientX = e.pageX;
+                                        var clientY = e.pageY;
+                                        $("#ball").css({
+                                            "left": clientX - width,
+                                            "top": clientY - height
+                                        }).show(function () {
+                                            $(this).stop(true, true)
+                                                .animate({
+                                                    "left": endX,
+                                                    "top": endY
+                                                }, function () {
+                                                    $(this)
+                                                        .hide();
+                                                });
+                                        })
+
+                                        var spz = $(".icon-cartnum")
+                                            .html() * 1 + 1;
+                                        $(".icon-cartnum").html(spz);
+                                        //利用ajax往数据库内传递数据
+                                        $.ajax({
+                                            type: "get",
+                                            url: "../php/addmyshoppingcar.php",
+                                            data: {
+                                                userid: userId,
+                                                goodsid: goodsId,
+                                                goodsname: goodsName,
+                                                goodsnum: 1,
+                                                goodsprice: goodsprice,
+                                                goodsimg: goodsimg
+                                            },
+                                            dataType: "json",
+                                            success: function (
+                                                obj) {
+                                                if (obj[
+                                                        "code"
+                                                    ] == 1) {
+
+                                                } else {
+                                                    alert(obj[
+                                                        "msg"
+                                                    ])
+
+                                                }
+                                            }
+                                        })
+                                    } else {
+                                        $(".tcshow").show(function () {
+                                            $(".tcshow-l").click(
+                                                function () {
+                                                    gotoLogin();
+                                                    window
+                                                        .location
+                                                        .href =
+                                                        "./login.html";
+                                                })
+                                            $(".tcshow-r").click(
+                                                function () {
+                                                    $(".tcshow")
+                                                        .hide();
+                                                })
+                                        });
+
+                                    }
+
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
+    //动态生成完毕之后
+
+
+
+
+    function productList2(key, paixu, rank, jg1, jg2) {
+        var productsUl = $(".products-1")[0];
+        $.ajax({
+            type: "get",
+            data: {
+                key: key,
+                paixu: paixu,
+                rank: rank,
+            },
+            url: "../php/getallgoodslistcount.php",
+            dataType: "json",
+            success: function (obj) {
+                var count = obj["count"];
+                new Page("#page", {
+                    count: count,
+                    shownum: 16,
+                    showpage: 3,
+                    callback: function (pageIndex) {
+                        $.ajax({
+                            type: "get",
+                            url: "../php/goodsList2.php",
+                            data: {
+                                key: key,
+                                paixu: paixu,
+                                rank: rank,
+                                jg1: jg1,
+                                jg2: jg2,
+                                skipnum: (pageIndex - 1) * 16,
+                                shownum: 16,
+                            },
+                            dataType: "json",
+                            success: function (list) {
+                                var html = "";
+                                list.forEach(item => {
+                                    var {
+                                        id,
+                                        goodsname,
+                                        goodsnum,
+                                        goodsprice,
+                                        goodsimg,
+                                        goodsohter
+                                    } = item;
+                                    html += `<li class="products-items">
+                                                <div class="product-photo" data-id=${id}>
+                                                 <img src="../images/${goodsimg}" alt="">
+                                                </div>
+
+                                                <div class="product-info">
+                                                    <div class="product-price">
+                                                        <span>￥ ${(goodsprice*1).toFixed(2)}</span>
+                                                    </div>
+                                                    <div style="color: purple;margin-bottom: 5px;margin-top:5px;">商品库存 ${goodsnum} 件</div>
+                                                    <div class="product-name">
+                                                        <span>${goodsname}</span>
+                                                    </div>
+                                                    <div class="product-ohter">
+                                                        <span>成交 ${goodsohter} 笔</span>
+                                                    </div>
+                                                    <div class="product-jrgwc" data-id=${id}  data-src="../images/${goodsimg}" data-name=${goodsname} data-price=${goodsprice}>
+                                                     加入购物车
+                                                    </div>
+                                                </div>
+                                            </li>`
+                                });
+                                productsUl.innerHTML = html;
+
+                                $(".product-photo").on("click", function () {
+                                    var goodsId = $(this).attr("data-id");
+                                    localStorage.setItem("goodsid",
+                                        goodsId);
+                                    window.location.href =
+                                        "./goodsdetails.html";
+                                });
+
+                                $(".product-jrgwc").on("click", function (
+                                    e) {
+                                    if (loginId) {
+                                        var userId = loginId;
+                                        var goodsId = $(this).attr(
+                                            "data-id");
+                                        var goodsName = $(this).attr(
+                                            "data-name");
+                                        var goodsprice = $(this).attr(
+                                            "data-price");
+                                        var goodsimg = $(this).attr(
+                                            "data-src").split("/")[2];
+
+                                        var goodsImg = $(this).attr(
+                                            "data-src");
+                                        ($("#ball img").attr("src",
+                                            goodsImg
+                                        )); //飞入购物车效果
+                                        var endX = $(".cartbox").offset()
+                                            .left;
+                                        var endY = $(".cartbox").offset()
+                                            .top;
+                                        var width = $("#ball").width() / 2;
+                                        var height = $("#ball").height() /
+                                            2;
+                                        var clientX = e.pageX;
+                                        var clientY = e.pageY;
+                                        $("#ball").css({
+                                            "left": clientX - width,
+                                            "top": clientY - height
+                                        }).show(function () {
+                                            $(this).stop(true, true)
+                                                .animate({
+                                                    "left": endX,
+                                                    "top": endY
+                                                }, function () {
+                                                    $(this)
+                                                        .hide();
+                                                });
+                                        })
+
+                                        var spz = $(".icon-cartnum")
+                                            .html() * 1 + 1;
+                                        $(".icon-cartnum").html(spz);
+                                        //利用ajax往数据库内传递数据
+                                        $.ajax({
+                                            type: "get",
+                                            url: "../php/addmyshoppingcar.php",
+                                            data: {
+                                                userid: userId,
+                                                goodsid: goodsId,
+                                                goodsname: goodsName,
+                                                goodsnum: 1,
+                                                goodsprice: goodsprice,
+                                                goodsimg: goodsimg
+                                            },
+                                            dataType: "json",
+                                            success: function (
+                                                obj) {
+                                                if (obj[
+                                                        "code"
+                                                    ] == 1) {
+
+                                                } else {
+                                                    alert(obj[
+                                                        "msg"
+                                                    ])
+
+                                                }
+                                            }
+                                        })
+                                    } else {
+                                        $(".tcshow").show(function () {
+                                            $(".tcshow-l").click(
+                                                function () {
+                                                    gotoLogin();
+                                                    window
+                                                        .location
+                                                        .href =
+                                                        "./login.html";
+                                                })
+                                            $(".tcshow-r").click(
+                                                function () {
+                                                    $(".tcshow")
+                                                        .hide();
+                                                })
+                                        });
+
+                                    }
+
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
+
+    }
+</script>
+<!-- 购物车 -->
+<script>
+    //判断本地存储 是否存在值
+    var loginId = window.localStorage.getItem("loginId");
+    var loginName = window.localStorage.getItem("loginName");
+    //对面loginId进行判断
+    if (loginId) {
+        var spanBtn = $("<a class='userd2'></a><button onclick='existLogin()' class='btn'>退出</button>");
+        $("#userdl").append(spanBtn);
+        $(".userd2").html("欢迎:" + loginName);
+        $(".btn").css({
+            "outline": "none",
+            "border": "none",
+            "width": "34px",
+            "height": "20px",
+            "font-family": '微软雅黑',
+            "font-size": "12px",
+            "color": " #FFFFFF",
+            "background-color": "#ff611b",
+            "text-decoration": " none",
+            "display": "inline-block",
+            "line-height": "20px",
+            "cursor": "pointer",
+        });
+    } else {
+        var spanBtn = $("<a href='../html/login.html'>登陆</a><span>|</span><a href='../html/register.html'>注册</a>")
+        $("#userdl").append(spanBtn);
+    }
+    //封装退出函数,删除已经存在的本地储存信息;
+    function existLogin() {
+        window.localStorage.removeItem("loginId");
+        window.localStorage.removeItem("loginName");
+        gotoLogin()
+    }
+    //封装一个函数让页面带页面信息去到登陆页面
+    function gotoLogin() {
+        window.localStorage.setItem("backUrl", window.location.href); //将本地页面的网站地址丢入本地储存
+        window.location.href = "./goodsList.html"; //跳转至本页面
+    }
+
+
+    //购物车主体内容开始
+
+    //判断是否有用户值传进来
+    if (loginId) {
+
+        //调用封装ajax;
+        $.ajax({
+            type: "get",
+            url: "../php/myshoppingcar.php", //php1
+            data: {
+                userid: loginId
+            },
+            dataType: "json",
+            success: function (obj) {
+                var html = "";
+                obj.forEach((item) => {
+                    var {
+                        id,
+                        goodsid,
+                        goodsname,
+                        goodsnum,
+                        goodsprice,
+                        goodsimg
+                    } = item;
+                    html += `<ul id="tr">
+                                        <li>
+                                         <input class="check-one" type="checkbox" data-id="${id}">
+                                        </li>
+                                        <li class="goods">
+                                         <img src="../images/${goodsimg}">
+                                         <span>${goodsname}</span>
+                                        </li>
+                                        <li>${goodsprice}</li>
+                                        <li>
+                                            <span class="reduce" onclick="reduceNum(${id},this,'${goodsprice}')"> ${goodsnum>1?"-":""}</span>
+                                            <input class="count-input" value="${goodsnum}">
+                                            <span class="add" onclick="addNum(${id},this,'${goodsprice}')">+</span>
+                                        </li>
+                                        <li class="subtotal">${(goodsprice*goodsnum).toFixed(2)}</li>
+                                        <li><span onclick="deleteNum(${id},this,${goodsid})">删除</span></li>
+                                    </ul>`;
+
+                });
+                $("#tbody").append(html);
+                //给全选和单选写点击事件 ↓↓↓
+                var countNum = 0;
+                //点击全选事件,下面所有按钮都被选中状态
+                $(".check-all").click(function () { //末尾[0]不能加
+                    var flag = $(this).prop("checked");
+                    $(".check-one").prop("checked", flag);
+                    countNum = flag ? $(".check-one").length : 0;
+                    getTotal();
+                });
+                //当单选按钮全部被选中的时候全选按钮被选中
+                $(".check-one").click(function () {
+                    if ($(this).prop("checked")) {
+                        countNum++;
+                    } else {
+                        countNum--;
+                    }
+                    if (countNum == $(".check-one").length) {
+                        $(".check-all").prop("checked", true);
+                    } else {
+                        $(".check-all").prop("checked", false);
+                    }
+                    getTotal();
+                })
+                //点击事件一阶段结束↑↑↑
+                //给删除按钮写点击事件对象对应的值进行删除
+                // var deleteSpan = document.getElementById("deleteAll");
+                $("#deleteAll").click(function () {
+                    var idList = [];
+                    $(".check-one").each(function (index, item) {
+                        var id = $(item).attr("data-id");
+                        idList.push(id);
+                        $(item).parent().parent().remove();
+                        getTotal();
+                        countNum = 0; //判断当countNum 的时候
+                        index = $(".check-one").length; //最大下标数为现有的长度更新
+                    })
+                    var ids = idList.join(",");
+                    $.ajax({
+                        type: "get",
+                        url: "../php/delmyshoppingcarbyid.php", //php2
+                        data: {
+                            id: ids
+                        },
+                        dataType: "json",
+                        success: function (obj) {
+                            if (obj["code"] == 1) {
+
+                            } else {
+                                alert(obj["msg"]);
+                            }
+                        }
+                    });
+                })
+                //点击结算
+                $("#jiesuan li").eq(3).on("click", function () {
+                    var len = $(".check-one:checked").length;
+                    if (len > 0) {
+                        if ($("#dianjish1").prop("checked")) {
+                            if ($("#control-labeltxt").val() != "" && $("#control-labeltxt1")
+                                .val() != "" || $("#control-labeltxt2").val() != "") {
+
+                                window.location.href = "./js.html";
+
+                            } else {
+
+                                $(".tcshow").show(function () {
+                                    $(".tcshow p").html("收货地址未按照要求填写");
+                                    $(".tcshow-l").html("填写").click(function () {
+                                        $(".tcshow").hide();
+                                    });
+                                    $(".tcshow-r").html("继续逛逛").click(function () {
+                                        $(".tcshow").hide();
+                                    });
+                                })
+                            }
+                        } else {
+
+                            $(".tcshow").show(function () {
+                                $(".tcshow p").html("亲!向上看!请选择你的收货地址哦!");
+                                $(".tcshow-l").html("立即选择").click(function () {
+                                    $(".tcshow").hide();
+                                });
+                                $(".tcshow-r").html("继续逛逛").click(function () {
+                                    $(".tcshow").hide();
+                                });
+                            })
+
+
+
+                        }
+
+
+                    } else {
+                        $(".tcshow").show(function () {
+                            $(".tcshow p").html("你没选中任何商品");
+                            $(".tcshow-l").html("立即选择").click(function () {
+                                $(".tcshow").hide();
+                            });
+                            $(".tcshow-r").html("继续逛逛").click(function () {
+                                $(".tcshow").hide();
+                            });
+                        })
+                    }
+                });
+
+
+
+
+
+            }
+        });
+
+    } else { //此处需要更改信息
+        window.localStorage.setItem("backUrl", window.location.href);
+        window.location.href = "./login.html";
+    }
+
+    //给加号写操作事件S ↓↓↓
+    function addNum(id, span, price) {
+        span.onclick = null; //开始点击时span为空;
+        span.style.color = "red"; //点击之后加号变为红色;
+        var countInp = span.previousElementSibling; //查找此元素的上一级元素;
+        countInp.value = countInp.value * 1 + 1; //找到元素点击时候元素内的值加1;
+        var total = countInp.value * price; //将点击加号后的值乘以元素的单价得到小计里面的单价;
+        var totalLi = span.parentNode.nextElementSibling; //找到加号元素父元素的下个元素将小计丢入到里面去;
+        totalLi.innerHTML = total.toFixed(2); //将值丢入到小计里面去;
+        var reduceSpan = countInp.previousElementSibling; //当点击加号的时候获取减号框的值
+        reduceSpan.innerHTML = "-"; //将减号赋值给减号框;
+        $.ajax({ //调用ajax
+            type: "get",
+            url: "../php/changenum.php", //php3
+            data: {
+                id: id, //传2个值进去
+                num: countInp.value
+            },
+            dataType: "json",
+            success: function (obj) {
+                if (obj["code"] == 1) {
+                    span.style.color = "blue";
+                    span.onclick = function () {
+                        addNum(id, span, price);
+                    }
+                } else {
+                    alert(obj["msg"]);
+                }
+            }
+        });
+        getTotal()
+    }
+
+    //给减号附加点击事件↓↓↓
+    function reduceNum(id, span, price) {
+        span.onclick = null;
+        span.style.color = "red"; //点击的时候颜色变为红色
+        var countInp = span.nextElementSibling; //找到点击元素的下一个元素
+        if (countInp.value * 1 > 1) {
+            countInp.value = countInp.value * 1 - 1; //将里面的数值进行减1;
+            var total = countInp.value * price; //将点击减号后的值乘以元素的单价得到小计里面的单价;
+            var totalLi = span.parentNode.nextElementSibling; //找到减号元素父元素的下个元素将小计丢入到里面去;
+            totalLi.innerHTML = total.toFixed(2); //将值丢入到小计里面去;
+            //调用ajax将值进行数据库传递
+            $.ajax({
+                type: "get",
+                url: "../php/changenum.php", //php3
+                data: {
+                    id: id, //传2个值进去
+                    num: countInp.value
+                },
+                dataType: "json",
+                success: function (obj) {
+                    if (obj["code"] == 1) {
+                        span.style.color = "blue";
+                        span.onclick = function () {
+                            reduceNum(id, span, price);
+                        }
+                    } else {
+                        alert(obj["msg"]);
+                    }
+                }
+            });
+            if (countInp.value * 1 == 1) {
+                span.innerHTML = "";
+            }
+        } else {
+            span.innerHTML = "";
+        }
+        getTotal();
+    }
+
+
+
+    // 给删除元素写点击事件将此行信息删除并且在数据库内也删除该信息
+    function deleteNum(id, span) {
+        $.ajax({
+            type: "get",
+            url: "../php/deletenum.php", // php4
+            data: {
+                id: id
+            },
+            dataType: "json",
+            success: function (obj) {
+                if (obj["code"] == 1) {
+                    span.parentNode.parentNode.remove();
+                } else {
+                    alert(obj["msg"]);
+                }
+            }
+
+        });
+    }
+
+
+    //封装函数计算总共买了多少件商品,以及总价的金额是多少元
+    function getTotal() {
+        var selectedSpan = document.getElementById("selected"); //找到页面对应购买件数的值
+        var footingSpan = document.getElementById("footing"); //找到页面对应购买总金额的值
+
+        // var $(".check-one") = document.getElementsByClassName("check-one");
+        var count = 0; //设置一个购买件数为空
+        var subtotal = 0; //设置一个购买总金额为空
+        for (var i = 0; i < $(".check-one").length; i++) { //循环check-one元素
+            if ($(".check-one")[i].checked) { //当哪个被选中的时候
+                var ul = $(".check-one")[i].parentNode.parentNode; //找到该元素的父元素
+                var countInput = ul.getElementsByClassName("count-input")[0]; //找到对应的个数
+                var subtotalTd = ul.getElementsByClassName("subtotal")[0]; //找到对应的小计总价
+
+                count = count + countInput.value * 1; //得到总共购买的件数;
+                subtotal = subtotal + subtotalTd.innerHTML * 1;
+            }
+        }
+        //循环找值结束后
+        selectedSpan.innerHTML = count;
+        footingSpan.innerHTML = subtotal;
+    }
+
+    //购物车主体内容完毕
+
+
+
+    //省市联动开始
+    $(function () {
+        var html = "<option value=''>== 请选择 ==</option>";
+        $("#input_city").append(html);
+        $("#input_area").append(html);
+        $.each(pdata, function (idx, item) {
+            if (parseInt(item.level) == 0) {
+                html += "<option value='" + item.names + "' exid='" + item.code + "'>" + item.names +
+                    "</option>";
+            }
+        });
+        $("#input_province").append(html);
+
+        $("#input_province").change(function () {
+            if ($(this).val() == "") return;
+            $("#input_city option").remove();
+            $("#input_area option").remove();
+            var code = $(this).find("option:selected").attr("exid");
+            code = code.substring(0, 2);
+            var html = "<option value=''>== 请选择 ==</option>";
+            $("#input_area").append(html);
+            $.each(pdata, function (idx, item) {
+                if (parseInt(item.level) == 1 && code == item.code.substring(0, 2)) {
+                    html += "<option value='" + item.names + "' exid='" + item.code + "'>" +
+                        item.names + "</option>";
+                }
+            });
+            $("#input_city").append(html);
+        });
+
+        $("#input_city").change(function () {
+            if ($(this).val() == "") return;
+            $("#input_area option").remove();
+            var code = $(this).find("option:selected").attr("exid");
+            code = code.substring(0, 4);
+            var html = "<option value=''>== 请选择 ==</option>";
+            $.each(pdata, function (idx, item) {
+                if (parseInt(item.level) == 2 && code == item.code.substring(0, 4)) {
+                    html += "<option value='" + item.names + "' exid='" + item.code + "'>" +
+                        item.names + "</option>";
+                }
+            });
+            $("#input_area").append(html);
+        });
+        //绑定
+        $("#input_province").val("");
+        $("#input_province").change();
+        $("#input_city").val("");
+        $("#input_city").change();
+        $("#input_area").val("");
+
+    });
+</script>
+<!-- 登陆 -->
+<script>
+    $("#loginBtn").click(function () {
+        var username = $("#loginName").val();
+        var userpwd = $("#pwd").val();
+        $.ajax({
+            type: "get",
+            url: "../php/login.php",
+            data: {
+                username: username,
+                userpwd: userpwd,
+            },
+            dataType: "json",
+            success: function (item) {
+                if (item["code"] == 1) {
+
+
+
+                    //登陆成功之后设置本地储存
+                    localStorage.setItem("loginId", item["userid"]); //跟cookie一样作用将用户id设置到本地储存
+                    localStorage.setItem("loginName", username); //跟cookie一样做用将用户名设置到本地储存
+                    //对页面本地存储进行获取判断 ↓↓↓
+                    var backUrl = window.localStorage.getItem("backUrl"); //获取本地存储的商品列表的网站信息;
+                    if (backUrl) { // 如果这个网站存在
+                        window.location.href = backUrl; //如果此本地存储存在就直接跳转到它的界面;
+                    } else { //如果这个网站不存在
+                        window.location.href = "../index.html";
+                    }
+
+
+                } else {
+                    $(".tcshow").show();
+                    $(".tcshow p").html(item["msg"]);
+                    $(".tcshow-l").on("click", function () {
+                        $(".tcshow").hide();
+                    })
+                }
+            }
+        })
+    })
+</script>
+
+</html>

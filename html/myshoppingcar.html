@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/myshoppingcar.css">
+</head>
+
+<body>
+    <!-- 商品购物车界面     -->
+
+
+    <!-- 头部样式开始 -->
+    <div class="header">
+        <!-- 头部横条开始 -->
+        <div class="topbar1">
+            <div class="topbar">
+                <div class="dropdown">
+                    <i class="icon-deliver"></i>
+                    <span class="icon-span">送至:湖北省 </span>
+                    <i class="icon-downg"></i>
+                </div>
+
+                <div class="fn-left" id="userdl">
+                    <!-- <a href="./html/login.html">登陆</a>
+                                    <span>|</span>
+                                    <a href="./html/register.html">注册</a> -->
+                </div>
+
+                <div class="myorder">
+                    <span>
+                        <i></i>
+                        我的订单
+                    </span>
+                </div>
+
+                <div class="collectus">
+                    <span>
+                        <i></i>
+                        收藏本站（Ctrl+D）
+                    </span>
+                </div>
+
+                <div class="shopsCentre">
+                    <span>
+                        <i></i>
+                        商家中心
+                    </span>
+                </div>
+
+                <div class="fn-right">
+                    <span>
+                        <i></i>
+                        我要兑换
+                    </span>
+                </div>
+
+                <div class="helpcenter">
+                    <span>
+                        <i></i>
+                        帮助中心
+                    </span>
+                </div>
+
+                <div class="phoneapp">
+                    <span>
+                        <i></i>
+                        手机APP
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- 头部横条结束 -->
+
+
+        <!-- logo搜索栏开始 -->
+        <div class="logo-bar">
+            <div class="headercont">
+                <a href="../index.html" title="万企采集">
+                    <img src="../images/logo.png" alt="万企采集">
+                </a>
+
+
+            </div>
+        </div>
+        <!-- logo搜索栏结束 -->
+    </div>
+    <!-- 头部样式结束 -->
+
+    <!-- 收货地址管理 -->
+    <div class="row cl">
+        <h5>收货地址管理</h5>
+        <div class="col-sm-12 cl">
+            <div class="form-group cl">
+                <label class="control-label">所在区域</label>
+                <div class="col-sm-3">
+                    <select name="input_province" id="input_province" class="form-control">
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <select name="input_city" id="input_city" class="form-control">
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <select name="input_area" id="input_area" class="form-control">
+                    </select>
+                </div>
+            </div>
+            <label class="control-label1">
+                请填写详情收货地址:<textarea id="control-labeltxt" cols="60" rows="2" style="resize:none"
+                    spellcheck="false"></textarea>
+            </label></br>
+            <label class="control-label1">
+                请填写电话号码:<textarea id="control-labeltxt1" cols="60" rows="2" style="resize:none"
+                    spellcheck="false"></textarea>
+            </label></br>
+            <label class="control-label1">
+                备注:<textarea id="control-labeltxt2" cols="60" rows="2" style="resize:none"
+                    spellcheck="false"></textarea>
+            </label>
+        </div>
+        <div class="dianjish">选择该收货地址<input type="checkbox" id="dianjish1"></div>
+    </div>
+
+
+    <!-- 收货地址管理 -->
+
+    <!-- 购物车主体结构 s-->
+    <div id="box">
+        <ul id="th">
+            <li>
+                <input class="check-all" type="checkbox">全选
+            </li>
+            <li class="goods">商品</li>
+            <li>单价</li>
+            <li>数量</li>
+            <li>小计</li>
+            <li>操作</li>
+        </ul>
+        <div id="tbody">
+
+        </div>
+        <div id="dibujs">
+            <ul id="jiesuan">
+                <li>
+                    <span id="deleteAll">删除</span>
+                </li>
+                <li>
+                    已选商品:<span id="selected"></span>
+                </li>
+                <li>
+                    合计:¥<span id="footing"></span>
+                </li>
+                <li>
+                    <span id="close">结算</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 购物车主体结构E -->
+
+
+
+    <!-- 页面底部S -->
+    <div class="footer cl">
+        <div class="wrap-1200 text cl">
+            <div class="footer mt20 cl" id="footer">
+                <div class="assure" style="width:100%;float:left;margin-bottom:20px;">
+                    <div class="wrap-1200a">
+                    </div>
+                </div>
+                <div class="wrap-1200 cl">
+                    <div class="fn-clear cl">
+                        <div class="footer-menu fn-clear cl" id="footermenu">
+                            <dl>
+                                <dt>
+                                    <b>购物指南</b>
+                                </dt>
+                                <dd>
+                                    <a href="" target="_blank" title="用户登录">用户登录</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="提交订单">提交订单</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="订单查询">订单查询</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="用户注册">用户注册</a>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>
+                                    <b>支付方式</b>
+                                </dt>
+                                <dd>
+                                    <a href="" target="_blank" title="发票须知">发票须知</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="在线支付">在线支付</a>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>
+                                    <b>物流配送</b>
+                                </dt>
+                                <dd>
+                                    <a href="" target="_blank" title="配送时间">配送时间</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="配送方式">配送方式</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="配送地区">配送地区</a>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>
+                                    <b>售后服务</b>
+                                </dt>
+                                <dd>
+                                    <a href="" target="_blank" title="退换货政策">退换货政策</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="退换货流程">退换货流程</a>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>
+                                    <b>兑换指南</b>
+                                </dt>
+                                <dd>
+                                    <a href="" target="_blank" title="什么是兑换券">什么是兑换券</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="如何购买兑换券">如何购买兑换券</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="如何定制兑换券">如何定制兑换券</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="如何使用兑换券">如何使用兑换券</a>
+                                </dd>
+                            </dl>
+                            <ul class="footer-code fn-right">
+                                <li class="footer-code-item fn-left">
+                                    <p class="code-hd">微信服务号</p>
+                                    <div class="code-img">
+                                        <img style="width: 89px" src="../images/contactus-weixin.jpg">
+                                    </div>
+                                </li>
+                                <li class="footer-code-item fn-right">
+                                    <p class="code-hd">官方微博</p>
+                                    <div class="code-img">
+                                        <img style="width: 89px" src="../images/contactus-weibo.jpg">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footerbar">
+                <div class="wrap-1190">
+                    <!--网站相关链接-->
+                    <div class="sitelink">
+                        <ul class="fn-clear">
+                            <li class="first"><a href="" target="_blank">关于我们</a>
+                            </li>
+                            <li><a href="">联系我们</a></li>
+                            <li><a href="" target="_blank">送礼网</a></li>
+                            <li><a href="" target="_blank">兑换册</a></li>
+
+                            <li><a href="" target="_blank">集采账号介绍</a></li>
+                            <li><a href="" target="_blank">万企集采.企业会员介绍</a></li>
+                        </ul>
+                    </div>
+                    <!--copyright-->
+                    <div>
+                        <p><img src="../images/copyright.jpg"
+                                style="width:10px;height:10px;margin-top:7px;margin-right:2px">2016&nbsp; <a href=""
+                                target="_blank">渝ICP备12002277-5号</a>
+                            &nbsp;经营许可证编号:渝B2-20120008&nbsp; 食品流通许可证:SP5009031110004929</p>
+                        <p>公司地址：重庆市两江新区星光大道软件园海王星E区 订购及售后服务电话: <span class="footer-phone"><i
+                                    class="ui-icon icon-phone"></i>4000-266-357</span></p>
+                    </div>
+                    <!--企业信用-->
+                    <div class="enterpriseCredit">
+                        <ul>
+
+                            <li>
+                                <a href="" target="_blank">
+                                    <img src="../images/360Icon.jpg" />
+                                </a>
+                            </li>
+                            <li>
+                                <a key="55e020bdefbfb0241247c916" logo_size="124x47" logo_type="business" href=""
+                                    target="_blank">
+                                    <script src=""></script>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a kx_type="缩放式" target="_blank" href="">
+                                    <img src="../images/footer-believe.jpg" style=" height: 42px;">
+                                </a>
+                            </li>
+                            <!--可信网站-->
+
+                            <li>
+                                <a href="" target="_blank">
+                                    <img src="../images/315new.gif">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" target="_blank">
+                                    <img src="../images/gf_04.gif" style="margin-top: 0px;">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" target="_blank">
+                                    <img width="52" height="68" src="../images/gswjimg.png" style="margin-top: 0px;">
+                                </a>
+                            </li>
+                            <li>
+                                <div style="width:300px;margin:0 auto; padding:20px 0;">
+                                    <a target="_blank" href=""
+                                        style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                                        <img src="../images/KeeponrecordIcon.png" style="float:left;margin-top:-1px" />
+                                        <p
+                                            style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                                            渝公网安备 50019002500438号</p>
+                                    </a>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 页面底部E -->
+
+
+
+    <!-- 弹出遮罩层进行判断 -->
+    <div class="tcshow" style="display:none;">
+        <p>您还未登陆是否立即登陆</p>
+        <span class="tcshow-l">立即登陆</span><span class="tcshow-r">继续逛逛</span>
+    </div>
+    <!-- 弹出遮罩层进行判断 -->
+
+
+</body>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/pdata.js"></script>
+<script src="../js/myshoppingcar.js"></script>
+
+</html>

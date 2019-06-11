@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.page {
+    width: 600px;
+    height: 36px;
+    margin: 20px auto;
+    /* //position: fixed; */
+    left: 200px;
+    bottom: 10px;
+}
+
+.page span {
+    width: 60px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    background-color: #f8f8f8;
+    color: #555;
+    float: left;
+    border-radius: 3px;
+    margin-left: 5px;
+    cursor: pointer;
+    /*加鼠标手小样式 */
+}
+
+.page span.disabled {
+    background-color: #cdcdcd;
+    color: black;
+}
+
+.page span.default {
+    background-color: #f8f8f8;
+    color: #555;
+}
+
+.page ul {
+    float: left;
+    height: 36px;
+}
+
+.page ul li {
+    width: 48px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    background-color: #f8f8f8;
+    color: #555;
+    float: left;
+    border-radius: 3px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.page ul li.selected {
+    background-color: #e60012;
+    color: black;
+}

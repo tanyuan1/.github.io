@@ -1,0 +1,49 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl,
+dd,
+input,
+button,
+textarea {
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    vertical-align: top;
+    border: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.cl:after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.cl {
+    zoom: 1;
+}
+
+
+// body {
+//     overflow-x: hidden;
+// }

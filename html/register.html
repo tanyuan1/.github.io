@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+
+<body>
+
+    <div class="logo" id="J-loginPage">
+        <a href="../index.html" class="logo fn-left" title="万企集采">
+            <img src="../images/logo.png" alt="万企集采">
+        </a>
+    </div>
+
+    <div class="ui-form">
+        <div class="form-hd-span">
+            我已经注册,现在就
+            <a href="./login.html">登陆</a>
+        </div>
+        <div class="form-cont">
+            <div class="ui-form-item">账户信息</div>
+            <!-- 注册用户名 -->
+            <div class="form-verify-error" id="divUserName" style="display:block">
+                <label class="ui-label">用&nbsp;户&nbsp;名：</label>
+                <span class="ui-input-item">
+                    <input type="text" class="ui-input" name="LoginName" id="username"
+                        placeholder="请输入长度为6-12位只能是数字和字母的组合">
+                </span>
+                <span class="ui-verify" id="usernamemessage" style="display:none;">
+                    <i class="icon"></i>请输入用户名</span>
+            </div>
+            <!-- 注册手机号 -->
+            <div class="form-verify-error">
+                <label class="ui-label">手&nbsp;机&nbsp;号：</label>
+                <span class="ui-input-item">
+                    <input type="text" class="ui-input" id="usertel" name="EmailOrMobile" placeholder="请输入正确的手机">
+                </span>
+                <span class="ui-verify" id="phoneoremailmessage" style="display:none;"><i class="icon"></i>请输入手机号</span>
+            </div>
+            <!-- 注册密码 -->
+            <div class="form-verify-error">
+                <label class="ui-label">请设置密码：</label>
+                <span class="ui-input-item">
+                    <input type="password" class="ui-input" name="Password" id="userpwd"
+                        placeholder="请输入6-20位字符，可使用数字、字母或_$进行组合">
+                </span>
+                <span class="ui-verify" id="pwdmessage" style="display:none;"><i class="icon"></i>请输入密码</span>
+            </div>
+            <!-- 密码强度 -->
+            <div class="ui-level">
+                <label class="level-label-remark fn-left">密码强度：</label>
+                <ul class="level-list fn-left level-second cl">
+                    <li class="level-1"></li>
+                    <li class="level-2"></li>
+                    <li class="level-3"></li>
+                    <li class="level-txt">中</li>
+                </ul>
+            </div>
+            <!-- 2次密码是否一致 -->
+            <div class="form-verify-error">
+                <label class="ui-label fn-left">请确认密码：</label>
+                <span class="ui-input-item">
+                    <input type="password" class="ui-input J-verify J-required" name="RpPassword" id="userpwd2"
+                        placeholder="请再次输入密码">
+                </span>
+                <span class="ui-verify" id="pwd2message" style="display:none;"><i class="icon"></i>请再次输入密码</span>
+            </div>
+
+            <!-- 请输入验证码 -->
+            <div class="form-verify-error" id="divValidateCode">
+                <label class="ui-label fn-left">验&nbsp;证&nbsp;码：</label>
+                <span class="ui-input-item">
+                    <input type="text" class="ui-input" style="width:200px;" name="Nums" id="Nums" placeholder="请输入验证码">
+                </span>
+                <label class="sccode">XEZQ</label>
+                <span class="ui-verify" id="verificationcodemessage" style="display:none;"><i
+                        class="icon"></i>请输入验证码</span>
+            </div>
+
+            <!-- 点击同意用户规则 -->
+            <div class="form-verify-error" id="divReadMe">
+                <label class="ui-label fn-left"></label>
+                <div class="form-item-readme">
+                    <input type="checkbox" class="ui-checkbox J-verify J-required" id="J-chkbox-readMe" name="ReadMe"
+                        data-required-tip="请阅读并同意协议" data-asyncstatus="1">
+                    <label class="ui-checkbox-label mt10" for="J-chkbox-readMe">
+                        我已阅读并同意<a href="javascript:;" class="form-link-forget" title="礼仪之邦平台服务协议">《礼仪之邦平台服务协议》</a>
+                        <a href="javascript:;" class="form-link-forgetToo" title="礼仪之邦法律声明及隐私权政策">《礼仪之邦法律声明及隐私权政策》</a>
+                    </label>
+                </div>
+                <span class="ui-verify" id="registrationagreementmessage" style="display:none;"><i
+                        class="icon"></i>请阅读并同意协议</span>
+            </div>
+
+            <!-- 立即注册 -->
+            <button id="ljzc">立即注册</button>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <p>重庆市礼仪之邦电子商务有限公司旗下品牌:礼仪之邦集食惠@2009-2020 <a href="http://www.miibeian.gov.cn"
+                target="_blank">渝ICP备12002277-5号</a> 经营许可证编号:渝B2-20120008</p>
+        <p>公司地址：重庆市两江新区星光大道软件园海王星E区 订购及售后服务电话:023-61819691 4000-266-357</p>
+    </div>
+
+
+    <!-- 弹出遮罩层进行判断 -->
+    <div class="tcshow" style="display:none;">
+        <p>您还未登陆是否立即登陆</p>
+        <span class="tcshow-l">知道了</span>
+    </div>
+    <!-- 弹出遮罩层进行判断 -->
+</body>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/register.js"></script>
+
+</html>

@@ -1,0 +1,224 @@
+@import"base.scss";
+
+body {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #999;
+    background-color: #fff;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.wrap-1190 {
+    position: relative;
+    width: 1190px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.login-head {
+    height: 110px;
+
+    .logo {
+        float: left;
+        margin-top: 20px;
+    }
+
+    .fn-left {
+        display: inline;
+
+
+    }
+
+
+
+    .head-right {
+        float: right;
+        margin: 20px;
+        width: 600px;
+
+        .goback {
+            position: relative;
+            float: right;
+            display: block;
+            font-size: 14px;
+            color: #666;
+        }
+
+        img {
+            border: 0;
+            vertical-align: top;
+        }
+
+        .icon-loginback {
+            left: -24px;
+            top: 2px;
+            width: 16px;
+            height: 18px;
+            // background-position: -480px -96px;
+            position: absolute;
+            display: block;
+            background: url(../images/ui-icon.png) no-repeat -480px -96px;
+        }
+    }
+}
+
+.login-main {
+    width: 100%;
+    height: 580px;
+    background-color: #fe4c4c;
+
+    .loginmain-left {
+        float: left;
+        width: 830px;
+        overflow: hidden;
+
+        img {
+            border: 0;
+            vertical-align: top;
+        }
+    }
+
+    .loginmain-right {
+        float: left;
+        width: 360px;
+        height: 580px;
+        overflow: hidden;
+
+        .idlogin {
+            position: absolute;
+            top: 50%;
+            width: 360px;
+            height: 409px;
+            color: #666;
+            background-color: #ffeded;
+            zoom: 1;
+            margin-top: -204.5px;
+
+            .title {
+                padding-left: 30px;
+                height: 52px;
+                line-height: 52px;
+                font-size: 18px;
+            }
+
+            .ui-form-item {
+
+                position: relative;
+                margin: 0 30px;
+                width: auto;
+                font-size: 12px;
+                font-family: 宋体;
+                padding: 2px;
+                color: #666;
+                margin-top: 40px;
+
+                .ui-icon {
+                    top: 8px;
+                    left: 12px;
+                    width: 24px;
+                    height: 25px;
+                    position: absolute;
+                    display: block;
+                    background: url(../images/ui-icon.png) no-repeat -400px -128px;
+                }
+
+                .ui-icon1 {
+                    top: 8px;
+                    left: 12px;
+                    width: 24px;
+                    height: 25px;
+                    background-position: -440px -128px;
+                    position: absolute;
+                    display: block;
+                    background: url(../images/ui-icon.png) no-repeat -440px -128px;
+                }
+
+                .ui-input {
+                    width: 255px;
+                    height: 40px;
+                    line-height: 40px;
+                    padding-left: 40px;
+                    background-color: #fff;
+                    margin: 0;
+                    // padding: 0;
+                    outline: none;
+                }
+
+            }
+
+            #loginBtn {
+                outline: none;
+                width: 300px;
+                font-family: '微软雅黑';
+                font-size: 18px;
+                color: #FFFFFF;
+                text-decoration: none;
+                display: inline-block;
+                cursor: pointer;
+                height: 42px;
+                line-height: 42px;
+                border: none;
+                color: #fff;
+                background-color: #f63636;
+                margin-left: 32px;
+                margin-top: 40px;
+            }
+
+            .mfzc {
+                margin-top: 40px;
+                margin-left: 33px;
+
+                a {
+                    color: #666;
+                    font-size: 16px;
+                }
+
+                a:hover {
+                    color: #f63636;
+                }
+
+            }
+        }
+    }
+}
+
+
+//弹出层CSS
+.tcshow {
+    background-color: #faf9f9;
+    width: 300px;
+    height: 150px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 10000;
+    color: rgb(8, 6, 6);
+    border-radius: 5px;
+
+    p {
+        line-height: 60px;
+        color: rgb(17, 13, 13);
+        text-align: center;
+    }
+
+    .tcshow-l {
+        margin-left: 100px;
+        color: rgb(10, 8, 8);
+        display: block;
+        width: 100px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        border: 1px solid rgb(7, 6, 6);
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+
+}
+
+//弹出层CSS

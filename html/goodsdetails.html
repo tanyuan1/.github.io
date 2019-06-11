@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/goodsdetails.css">
+    <link rel="stylesheet" href="../css/magnifier.css">
+
+</head>
+
+<body>
+    <!-- 商品详情页面  -->
+
+    <!-- 头部样式开始 -->
+    <div class="header">
+
+        <!-- 头部横条开始 -->
+        <div class="topbar1">
+            <div class="topbar">
+                <div class="dropdown">
+                    <i class="icon-deliver"></i>
+                    <span class="icon-span">送至:湖北省 </span>
+                    <i class="icon-downg"></i>
+                </div>
+
+                <div class="fn-left" id="userdl">
+                    <!-- <a href="./html/login.html">登陆</a>
+                                <span>|</span>
+                                <a href="./html/register.html">注册</a> -->
+                </div>
+
+                <div class="myorder">
+                    <span>
+                        <i></i>
+                        我的订单
+                    </span>
+                </div>
+
+                <div class="collectus">
+                    <span>
+                        <i></i>
+                        收藏本站（Ctrl+D）
+                    </span>
+                </div>
+
+                <div class="shopsCentre">
+                    <span>
+                        <i></i>
+                        商家中心
+                    </span>
+                </div>
+
+                <div class="fn-right">
+                    <span>
+                        <i></i>
+                        我要兑换
+                    </span>
+                </div>
+
+                <div class="helpcenter">
+                    <span>
+                        <i></i>
+                        帮助中心
+                    </span>
+                </div>
+
+                <div class="phoneapp">
+                    <span>
+                        <i></i>
+                        手机APP
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- 头部横条结束 -->
+
+
+        <!-- logo搜索栏开始 -->
+        <div class="logo-bar">
+            <div class="headercont">
+                <a href="../index.html" title="万企采集">
+                    <img src="../images/logo.png" alt="万企采集">
+                </a>
+
+                <div class="searchbox">
+                    <div>
+                        <i class="icon-search"></i>
+                        <input class="ui-input" type="text" style="width:470px" placeholder="搜索">
+                        <input class="ui-btn" type="text" value="搜索" type="button" id="btnSearch" disabled="disabled">
+                    </div>
+
+                    <div>
+                        <span>热搜:</span>
+                        <a href="./goodsList.html" class="fn-left1 first">大闸蟹</a>
+                        <a href="./goodsList.html" class="fn-left1">蛋卷</a>
+                        <a href="./goodsList.html" class="fn-left1">牛奶</a>
+                        <a href="./goodsList.html" class="fn-left1">大米</a>
+                        <a href="./goodsList.html" class="fn-left1">鸡汤</a>
+                        <a href="./goodsList.html" class="fn-left1">食用油</a>
+                        <a href="./goodsList.html" class="fn-left1">米粉</a>
+                    </div>
+                </div>
+
+                <div class="cartbox">
+                    <a href="./myshoppingcar.html" class="carbtn" title="点击进入我的购物车">
+                        <i class="icon-cart">
+                            <span class="icon-cartnum" id="spCount">0</span>
+                        </i>
+                        <span class="ml10">我的购物车▶</span>
+                        <i></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- logo搜索栏结束 -->
+
+
+
+        <!-- 菜单页开始 -->
+        <div class="menu">
+            <div class="wrap-1190">
+                <ul class="ui_nav_new">
+                    <li class="ui-nav-item-first">
+                        <a href="./goodsList.html" class="ui-nav-item-first-a">全部商品分类</a>
+                    </li>
+
+
+
+                    <li class="ui-nav-item">
+                        <a href="../index.html" class="active">首页</a>
+                    </li>
+
+
+                    <li class="ui-nav-item">
+                        <a href="./goodsList.html">所有商品</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!-- 菜单页结束 -->
+
+
+    </div>
+    <!-- 头部样式结束 -->
+
+
+    <!-- 商品详情页面S -->
+    <div class="x-wrap">
+        <div class="breadcrumb">
+            <i class="icon-home"></i>
+            <a href="../index.html">首页</a>
+        </div>
+
+        <div class="x-product">
+
+
+            <!-- 左边放大镜效果 s-->
+            <div class="magnifier" id="magnifier1">
+                <div class="magnifier-container">
+                    <div class="images-cover"></div>
+                    <!--当前图片显示容器-->
+                    <div class="move-view"></div>
+                    <!--跟随鼠标移动的盒子-->
+                </div>
+                <div class="magnifier-assembly">
+                    <div class="magnifier-btn">
+                        <span class="magnifier-btn-left">&lt;</span>
+                        <span class="magnifier-btn-right">&gt;</span>
+                    </div>
+                    <!--按钮组-->
+                    <div class="magnifier-line">
+                        <ul class="clearfix animation03">
+                            <!-- <li>
+                                <div class="small-img">
+                                    <img src="../images/sp1.jpg" />
+                                </div>
+                            </li>
+                            <li>
+                                <div class="small-img">
+                                    <img src="../images/sp2.jpg" />
+                                </div>
+                            </li>
+                            <li>
+                                <div class="small-img">
+                                    <img src="../images/sp3.jpg" />
+                                </div>
+                            </li>
+                            <li>
+                                <div class="small-img">
+                                    <img src="../images/sp4.jpg" />
+                                </div>
+                            </li> -->
+                        </ul>
+                    </div>
+                    <!--缩略图-->
+                </div>
+                <div class="magnifier-view"></div>
+                <!--经过放大的图片显示容器-->
+            </div>
+            <!-- 左边放大镜效果 e-->
+            <!-- 右侧商品详情 -->
+            <div class="x-product-intro">
+
+                <div class="x-intro-left">
+
+                    <!-- <div class="x-goodsname">
+                        <h2 class="t-ellipsis">
+                            农仆网绵阳米粉 四川特产方便速食10袋混装240g*5 </h2>
+                    </div>
+
+                    <div class="x-goodsprice">
+                        <ul class="x-detail-list">
+                            <li class="x-bigger-item">
+                                <div class="x-t">价　　格</div>
+                                <div class="x-c">
+                                    <span class="x-price-new">￥50.00</span>
+                                    <span class="x-price-tips">销售价</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="x-goodsnum">
+                        <span>销&nbsp;&nbsp;&nbsp;&nbsp;量</span><span>已售出<span class="x-goodsnum-sp">148</span>件</span>
+                    </div>
+
+                    <div class="x-goodsdz">
+                        配送地址
+                    </div>
+
+                    <div class="x-goodsohter">
+                        <span>库&nbsp;&nbsp;&nbsp;&nbsp;存</span><span class="x-goodsohter-sp">53</span>
+                    </div>
+
+                    <div class="none-border">
+                        <div class="none-border1">数量</div>
+                        <div class="x-count-bar">
+                            <label class="x-count-input">
+                                <input type="text" value="1" id="buyTotalNum">
+                            </label>
+                            <label class="x-count-btn">
+                                <a class="x-add">+</a>
+                                <a class="x-cut">-</a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="x-product-btn">
+                        <button class="ljgm-btn"><i></i>立即购买</button>
+                        <button class="jrgwc-btn"><i></i>加入购物车</button>
+                    </div> -->
+
+                </div>
+
+                <div class="x-intro-right">集食惠,品质零食专卖平台</div>
+            </div>
+            <!-- 右侧商品详情 -->
+        </div>
+
+        <div class="x-container">
+            <div class="x-container1"></div>
+            <div class="x-container2">
+                <img src="../images/spxq100.png" title="此处为假">
+            </div>
+            <div class="x-container3">
+                <img src="../images/spxq200.jpg" title="此处为假">
+            </div>
+        </div>
+
+    </div>
+    <!-- 商品详情页面E -->
+
+
+    <!-- 页面底部S -->
+    <div class="footer cl">
+        <div class="wrap-1200 text cl">
+            <div class="footer mt20 cl" id="footer">
+                <div class="assure" style="width:100%;float:left;margin-bottom:20px;">
+                    <div class="wrap-1200a">
+                    </div>
+                </div>
+                <div class="wrap-1200 cl">
+                    <div class="fn-clear cl">
+                        <div class="footer-menu fn-clear cl" id="footermenu">
+                            <dl>
+                                <dt>
+                                    <b>购物指南</b>
+                                </dt>
+                                <dd>
+                                    <a href="" target="_blank" title="用户登录">用户登录</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="提交订单">提交订单</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="订单查询">订单查询</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="用户注册">用户注册</a>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>
+                                    <b>支付方式</b>
+                                </dt>
+                                <dd>
+                                    <a href="" target="_blank" title="发票须知">发票须知</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="在线支付">在线支付</a>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>
+                                    <b>物流配送</b>
+                                </dt>
+                                <dd>
+                                    <a href="" target="_blank" title="配送时间">配送时间</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="配送方式">配送方式</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="配送地区">配送地区</a>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>
+                                    <b>售后服务</b>
+                                </dt>
+                                <dd>
+                                    <a href="" target="_blank" title="退换货政策">退换货政策</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="退换货流程">退换货流程</a>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>
+                                    <b>兑换指南</b>
+                                </dt>
+                                <dd>
+                                    <a href="" target="_blank" title="什么是兑换券">什么是兑换券</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="如何购买兑换券">如何购买兑换券</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="如何定制兑换券">如何定制兑换券</a>
+                                </dd>
+                                <dd>
+                                    <a href="" target="_blank" title="如何使用兑换券">如何使用兑换券</a>
+                                </dd>
+                            </dl>
+                            <ul class="footer-code fn-right">
+                                <li class="footer-code-item fn-left">
+                                    <p class="code-hd">微信服务号</p>
+                                    <div class="code-img">
+                                        <img style="width: 89px" src="../images/contactus-weixin.jpg">
+                                    </div>
+                                </li>
+                                <li class="footer-code-item fn-right">
+                                    <p class="code-hd">官方微博</p>
+                                    <div class="code-img">
+                                        <img style="width: 89px" src="../images/contactus-weibo.jpg">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footerbar">
+                <div class="wrap-1190">
+                    <!--网站相关链接-->
+                    <div class="sitelink">
+                        <ul class="fn-clear">
+                            <li class="first"><a href="" target="_blank">关于我们</a>
+                            </li>
+                            <li><a href="">联系我们</a></li>
+                            <li><a href="" target="_blank">送礼网</a></li>
+                            <li><a href="" target="_blank">兑换册</a></li>
+
+                            <li><a href="" target="_blank">集采账号介绍</a></li>
+                            <li><a href="" target="_blank">万企集采.企业会员介绍</a></li>
+                        </ul>
+                    </div>
+                    <!--copyright-->
+                    <div>
+                        <p><img src="../images/copyright.jpg"
+                                style="width:10px;height:10px;margin-top:7px;margin-right:2px">2016&nbsp; <a href=""
+                                target="_blank">渝ICP备12002277-5号</a>
+                            &nbsp;经营许可证编号:渝B2-20120008&nbsp; 食品流通许可证:SP5009031110004929</p>
+                        <p>公司地址：重庆市两江新区星光大道软件园海王星E区 订购及售后服务电话: <span class="footer-phone"><i
+                                    class="ui-icon icon-phone"></i>4000-266-357</span></p>
+                    </div>
+                    <!--企业信用-->
+                    <div class="enterpriseCredit">
+                        <ul>
+
+                            <li>
+                                <a href="" target="_blank">
+                                    <img src="../images/360Icon.jpg" />
+                                </a>
+                            </li>
+                            <li>
+                                <a key="55e020bdefbfb0241247c916" logo_size="124x47" logo_type="business" href=""
+                                    target="_blank">
+                                    <script src=""></script>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a kx_type="缩放式" target="_blank" href="">
+                                    <img src="../images/footer-believe.jpg" style=" height: 42px;">
+                                </a>
+                            </li>
+                            <!--可信网站-->
+
+                            <li>
+                                <a href="" target="_blank">
+                                    <img src="../images/315new.gif">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" target="_blank">
+                                    <img src="../images/gf_04.gif" style="margin-top: 0px;">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" target="_blank">
+                                    <img width="52" height="68" src="../images/gswjimg.png" style="margin-top: 0px;">
+                                </a>
+                            </li>
+                            <li>
+                                <div style="width:300px;margin:0 auto; padding:20px 0;">
+                                    <a target="_blank" href=""
+                                        style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                                        <img src="../images/KeeponrecordIcon.png" style="float:left;margin-top:-1px" />
+                                        <p
+                                            style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">
+                                            渝公网安备 50019002500438号</p>
+                                    </a>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 页面底部E -->
+
+
+    <!-- 弹出遮罩层进行判断 -->
+    <div class="tcshow" style="display:none;">
+        <p>您还未登陆是否立即登陆</p>
+        <span class="tcshow-l">立即登陆</span><span class="tcshow-r">继续逛逛</span>
+    </div>
+    <!-- 弹出遮罩层进行判断 -->
+
+
+    <!-- 飞入购物车样式 -->
+    <div id="ball">
+        <img src="">
+    </div>
+</body>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/magnifier.js"></script>
+<script src="../js/goodsdetails.js"></script>
+
+</html>

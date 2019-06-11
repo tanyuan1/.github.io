@@ -1,0 +1,202 @@
+@charset "UTF-8";
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl,
+dd,
+input,
+button,
+textarea {
+  padding: 0;
+  margin: 0; }
+
+img {
+  vertical-align: top;
+  border: 0; }
+
+li {
+  list-style: none; }
+
+a {
+  text-decoration: none; }
+
+.cl:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden; }
+
+.cl {
+  zoom: 1; }
+
+body {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #999;
+  background-color: #fff;
+  height: 100%;
+  overflow-x: hidden; }
+
+.wrap-1190 {
+  position: relative;
+  width: 1190px;
+  margin: 0 auto;
+  overflow: hidden; }
+
+.login-head {
+  height: 110px; }
+  .login-head .logo {
+    float: left;
+    margin-top: 20px; }
+  .login-head .fn-left {
+    display: inline; }
+  .login-head .head-right {
+    float: right;
+    margin: 20px;
+    width: 600px; }
+    .login-head .head-right .goback {
+      position: relative;
+      float: right;
+      display: block;
+      font-size: 14px;
+      color: #666; }
+    .login-head .head-right img {
+      border: 0;
+      vertical-align: top; }
+    .login-head .head-right .icon-loginback {
+      left: -24px;
+      top: 2px;
+      width: 16px;
+      height: 18px;
+      position: absolute;
+      display: block;
+      background: url(../images/ui-icon.png) no-repeat -480px -96px; }
+
+.login-main {
+  width: 100%;
+  height: 580px;
+  background-color: #fe4c4c; }
+  .login-main .loginmain-left {
+    float: left;
+    width: 830px;
+    overflow: hidden; }
+    .login-main .loginmain-left img {
+      border: 0;
+      vertical-align: top; }
+  .login-main .loginmain-right {
+    float: left;
+    width: 360px;
+    height: 580px;
+    overflow: hidden; }
+    .login-main .loginmain-right .idlogin {
+      position: absolute;
+      top: 50%;
+      width: 360px;
+      height: 409px;
+      color: #666;
+      background-color: #ffeded;
+      zoom: 1;
+      margin-top: -204.5px; }
+      .login-main .loginmain-right .idlogin .title {
+        padding-left: 30px;
+        height: 52px;
+        line-height: 52px;
+        font-size: 18px; }
+      .login-main .loginmain-right .idlogin .ui-form-item {
+        position: relative;
+        margin: 0 30px;
+        width: auto;
+        font-size: 12px;
+        font-family: 宋体;
+        padding: 2px;
+        color: #666;
+        margin-top: 40px; }
+        .login-main .loginmain-right .idlogin .ui-form-item .ui-icon {
+          top: 8px;
+          left: 12px;
+          width: 24px;
+          height: 25px;
+          position: absolute;
+          display: block;
+          background: url(../images/ui-icon.png) no-repeat -400px -128px; }
+        .login-main .loginmain-right .idlogin .ui-form-item .ui-icon1 {
+          top: 8px;
+          left: 12px;
+          width: 24px;
+          height: 25px;
+          background-position: -440px -128px;
+          position: absolute;
+          display: block;
+          background: url(../images/ui-icon.png) no-repeat -440px -128px; }
+        .login-main .loginmain-right .idlogin .ui-form-item .ui-input {
+          width: 255px;
+          height: 40px;
+          line-height: 40px;
+          padding-left: 40px;
+          background-color: #fff;
+          margin: 0;
+          outline: none; }
+      .login-main .loginmain-right .idlogin #loginBtn {
+        outline: none;
+        width: 300px;
+        font-family: '微软雅黑';
+        font-size: 18px;
+        color: #FFFFFF;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        height: 42px;
+        line-height: 42px;
+        border: none;
+        color: #fff;
+        background-color: #f63636;
+        margin-left: 32px;
+        margin-top: 40px; }
+      .login-main .loginmain-right .idlogin .mfzc {
+        margin-top: 40px;
+        margin-left: 33px; }
+        .login-main .loginmain-right .idlogin .mfzc a {
+          color: #666;
+          font-size: 16px; }
+        .login-main .loginmain-right .idlogin .mfzc a:hover {
+          color: #f63636; }
+
+.tcshow {
+  background-color: #faf9f9;
+  width: 300px;
+  height: 150px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 10000;
+  color: #080606;
+  border-radius: 5px; }
+  .tcshow p {
+    line-height: 60px;
+    color: #110d0d;
+    text-align: center; }
+  .tcshow .tcshow-l {
+    margin-left: 100px;
+    color: #0a0808;
+    display: block;
+    width: 100px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border: 1px solid #070606;
+    cursor: pointer;
+    border-radius: 3px; }
+
+/*# sourceMappingURL=login.css.map */
